@@ -8,6 +8,7 @@ import { Latest, FullWidthTabs  } from './pages';
 import './App.css';
 
 import { useStateContext } from './contexts/ContextProvider';
+import "react-datepicker/dist/react-datepicker.css";
 
 const App = () => {
   const { setCurrentColor, setCurrentMode, currentMode, activeMenu, currentColor, themeSettings, setThemeSettings } = useStateContext();

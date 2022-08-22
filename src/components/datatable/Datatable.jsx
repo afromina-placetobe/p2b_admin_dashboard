@@ -3,20 +3,16 @@ import { DataGrid } from "@mui/x-data-grid";
 import { userColumns, userRows } from "../../datatablesource";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import Modal from '@material-ui/core/Modal';
+
+
+import ModalContainer from "./Modal";
 
 const Datatable = () => {
   const [data, setData] = useState(userRows);
 
-  const [open, setOpen] = useState(false);
+  const [modalShow, setModalShow] = useState(false);
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
+  
   const handleDelete = (id) => {
     setData(data.filter((item) => item.id !== id));
   };
@@ -45,25 +41,13 @@ const Datatable = () => {
   ];
   return (
     <div className="datatable">
-         <Modal
-        onClose={handleClose}
-        open={open}
-        style={{
-          position: 'absolute',
-          boxShadow:'0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);',
-          border: '2px solid #000',
-          backgroundColor: 'white',
-
-          height:780,
-          width: 640,
-          margin: 'auto'
-        }}
-      >
-        <h2>How are you?</h2>
-      </Modal>
+        <ModalContainer
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
       <div className="datatableTitle ">
         Add New Events
-        <div className="link"  onClick={handleOpen}>
+        <div className="link" onClick={() => setModalShow(true)}>
           Add New Event
         </div>
       </div>
