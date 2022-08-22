@@ -67,9 +67,9 @@ export default function FullWidthTabs() {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab label="Active" {...a11yProps(0)} />
+          <Tab label="Event" {...a11yProps(0)} />
           <Tab label="Pending" {...a11yProps(1)} />
-          <Tab label="Excpire" {...a11yProps(2)} />
+          <Tab label="Upcoming" {...a11yProps(2)} />
         </Tabs>
       </AppBar>
       <SwipeableViews
