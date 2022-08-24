@@ -10,13 +10,61 @@ max-width: 170px;
 
 }
 .imagecontainer{
-    height: 60px;
-    width: 80px;
+    height: 150px;
+    width: 220px;
     background-image: url('https://cdn.onlinewebfonts.com/svg/img_98811.png');
-    background-size: contain;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
     align-items: center;
-    margin-top: 20px;
+    margin-left: 10px;;
+    position: relative;
+    
 }
+.errortext{
+    color: red;
+    margin-top: 1px;;
+    font-size: 12px;
+}
+.image{
+    position: relative;
+
+}
+.inputc{
+    position: absolute;
+    top: 0px;;
+    height: 1000px;
+    opacity: 0;
+    background-color: red;
+
+}
+.picktext{
+    position: absolute;
+    left: 50px;
+    align-items: center;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    text-align: center;
+    background-color:green;
+    border-radius: 5px;;
+    padding: 3px;;
+    
+}
+        .modalButton{
+display: flex;
+gap: 10px;
+align-items: center;
+justify-content: end;
+        }
+        .submit{
+            outline: none;
+            color: white;
+            background-color: green !important;
+        }
+        .close{
+            outline: none;
+            border:none;
+            color: white;
+            background-color: rgb(244, 12, 12) !important;
+        }
