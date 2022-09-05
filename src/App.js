@@ -9,6 +9,7 @@ import './App.css';
 
 import { useStateContext } from './contexts/ContextProvider';
 import "react-datepicker/dist/react-datepicker.css";
+import DetailPage from './components/DetailPage';
 
 const App = () => {
   const { setCurrentColor, setCurrentMode, currentMode, activeMenu, currentColor, themeSettings, setThemeSettings } = useStateContext();
@@ -69,6 +70,7 @@ const App = () => {
                 <Route path="/" element={(<Latest />)} />
                 <Route path="/upcoming" element={(<Latest />)} />
                 <Route path="/list" element={(<FullWidthTabs />)} />
+                <Route path="/detailpage" element={(<DetailPage />)} />
 
               </Routes>
             </div>

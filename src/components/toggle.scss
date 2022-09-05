@@ -1,0 +1,27 @@
+.root {
+  padding: 10px;
+   background-color: blue; // root level style comes here
+}
+
+.text {
+  color: blue !important ;  // text level style comes here
+}
+
+.clickable {
+  text-decoration: none;
+  font-size: 12px;
+  color: red;
+  margin-left: 5px;  // show more/less level style comes here
+}
+.bg-green{
+
+  background-color: green;
+}
+.bg-blue{
+  
+  background-color: blue;
+}
+.bg-red{
+  
+  background-color: red;
+}
