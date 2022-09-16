@@ -9,6 +9,9 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import "./tables.scss"
 import Datatable from '../components/datatable/Datatable';
+import ExpiredEvents from '../components/datatable/EventData/Expired';
+import UpcomingEvents from '../components/datatable/EventData/upcoming';
+import PendingEvents from '../components/datatable/EventData/pending';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -67,7 +70,7 @@ export default function FullWidthTabs() {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab label="Event" {...a11yProps(0)} />
+          <Tab label="Expired" {...a11yProps(0)} />
           <Tab label="Pending" {...a11yProps(1)} />
           <Tab label="Upcoming" {...a11yProps(2)} />
         </Tabs>
@@ -78,13 +81,14 @@ export default function FullWidthTabs() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          Item One
+          <ExpiredEvents/>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          <Datatable/>
+          <PendingEvents/>
+          {/* <Datatable/> */}
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
-          Item Three
+          <UpcomingEvents/>
         </TabPanel>
       </SwipeableViews>
     </Box>

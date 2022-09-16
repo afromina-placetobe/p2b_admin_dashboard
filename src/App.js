@@ -2,15 +2,28 @@ import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { FiSettings } from 'react-icons/fi';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
-
-import { Navbar, Footer, Sidebar, ThemeSettings } from './components';
+import { Navbar, Footer } from './components';
+import Sidebar from './components/Sidebar';
+import ThemeSettings from './components/ThemeSettings';
 import { Latest, FullWidthTabs  } from './pages';
 import './App.css';
-
+import { SliderUnstyledValueLabelSlotProps } from '@mui/base';
 import { useStateContext } from './contexts/ContextProvider';
 import "react-datepicker/dist/react-datepicker.css";
 import DetailPage from './components/DetailPage';
-
+import axios from 'axios';
+//to generate csrf token
+axios.defaults.baseURL = "http://localhost:8000/";
+//to get data in json format
+axios.defaults.headers.post["Accept"] = "application/json";
+axios.defaults.headers.post["Content-Type"] = "application/json";
+axios.defaults.withCredentials = true;
+//for logout to get the token otherwise unauthorized
+// axios.interceptors.request.use(function (config) {
+// 	const token = localStorage.getItem("auth_token");
+// 	config.headers.Authorization = token ? `Bearer ${token}` : "";
+// 	return config;
+// });
 const App = () => {
   const { setCurrentColor, setCurrentMode, currentMode, activeMenu, currentColor, themeSettings, setThemeSettings } = useStateContext();
 
@@ -55,8 +68,8 @@ const App = () => {
           <div
             className={
               activeMenu
-                ? 'dark:bg-main-dark-bg  bg-main-bg min-h-screen md:ml-72 w-full  '
-                : 'bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2 '
+                ? 'dark:bg-main-dark-bg  bg-main-bg min-h-screen md:ml-72 w-full'
+                : 'bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2'
             }
           >
             <div className="fixed md:static bg-main-bg dark:bg-main-dark-bg navbar w-full ">
