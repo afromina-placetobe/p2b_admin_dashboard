@@ -85,7 +85,6 @@ export default function FullWidthTabs() {
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
           <PendingEvents/>
-          {/* <Datatable/> */}
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
           <UpcomingEvents/>

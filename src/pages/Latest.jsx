@@ -36,49 +36,62 @@ const handleAdd = () => {
 };
 
   return (
-    <div className="mt-14 ml-14 mr-14">
-      <p className="text">Latest events</p>
-      <Button style={{marginLeft:"50rem",marginTop:"-3rem", backgroundColor:"green",color:"white",borderColor:"green"}}
-       onClick={()=>handleAdd}>Add Event</Button>
-       <TableContainer component={Paper} className="table">
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell className="tableCell"> ID</TableCell>
-            <TableCell className="tableCell">Events</TableCell>
+    <><div className="modal fade" id="EditModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div className="modal-dialog modal-dialog-centered" role="document">
+        <div className="modal-content">
+          <div className="modal-header">
+            <h5 className="modal-title" id="exampleModalLongTitle">Add Event</h5>
+            <button type="button" className="close" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true" style={{ backgroundColor: "white", color: "black" }}>&times;</span>
+            </button>
+          </div>
+          <div className="modal-body">
+            <AddEvent />
+          </div>
+          
+        </div>
+      </div>
+    </div><div className="mt-14 ml-14 mr-14">
+        <p className="text">Latest events</p>
+        <Button style={{ marginLeft: "50rem", marginTop: "-3rem", backgroundColor: "green", color: "white", borderColor: "green" }}
+          data-bs-toggle="modal" data-bs-target="#EditModal"> Add Event</Button>
+        <TableContainer component={Paper} className="table">
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell className="tableCell"> ID</TableCell>
+                <TableCell className="tableCell">Events</TableCell>
 
-            <TableCell className="tableCell">Start Date</TableCell>
+                <TableCell className="tableCell">Start Date</TableCell>
 
-            <TableCell className="tableCell">Status</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {latestEvent.map((item) => (
-            <TableRow key={item.event_id}>
-              <TableCell className="tableCell">{item.event_id}</TableCell>
-              {/* <TableCell className="tableCell">
-                <div className="cellWrapper">
-                  <img src={row.img} alt="" className="image" />
-                  {row.product}
-                </div>
-              </TableCell> */}
+                <TableCell className="tableCell">Status</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {latestEvent.map((item) => (
+                <TableRow key={item.event_id}>
+                  <TableCell className="tableCell">{item.event_id}</TableCell>
+                  {/* <TableCell className="tableCell">
+              <div className="cellWrapper">
+                <img src={row.img} alt="" className="image" />
+                {row.product}
+              </div>
+            </TableCell> */}
 
-              <TableCell className="tableCell">{item.event_name}</TableCell>
-              <TableCell className="tableCell">{item.start_date}</TableCell>
-              {(item.event_status == 1)?
-                
-                <span style={{color:"green",align:"bottom"}}>Approved</span>
-              :
-              <span style={{color:"yellow"}}>Pending</span>
+                  <TableCell className="tableCell">{item.event_name}</TableCell>
+                  <TableCell className="tableCell">{item.start_date}</TableCell>
+                  {(item.event_status == 1) ?
 
-              }
-              <TableCell className="tableCell"></TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-    </div>
+                    <span style={{ color: "green", align: "bottom" }}>Approved</span>
+                    :
+                    <span style={{ color: "yellow" }}>Pending</span>}
+                  <TableCell className="tableCell"></TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div></>
   );
 };
 

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { FiSettings } from 'react-icons/fi';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import { Navbar, Footer } from './components';
@@ -12,6 +12,10 @@ import { useStateContext } from './contexts/ContextProvider';
 import "react-datepicker/dist/react-datepicker.css";
 import DetailPage from './components/DetailPage';
 import axios from 'axios';
+import Signin from './contexts/Signin';
+import { useNavigate } from 'react-router-dom';
+import SignUp from './contexts/Signup';
+import UserProfile from './components/UserProfile';
 //to generate csrf token
 axios.defaults.baseURL = "http://localhost:8000/";
 //to get data in json format
@@ -26,7 +30,7 @@ axios.defaults.withCredentials = true;
 // });
 const App = () => {
   const { setCurrentColor, setCurrentMode, currentMode, activeMenu, currentColor, themeSettings, setThemeSettings } = useStateContext();
-
+  /* const navigate = useNavigate();*/
   useEffect(() => {
     const currentThemeColor = localStorage.getItem('colorMode');
     const currentThemeMode = localStorage.getItem('themeMode');
@@ -39,6 +43,7 @@ const App = () => {
   return (
     <div className={currentMode === 'Dark' ? 'dark' : ''}>
       <BrowserRouter>
+      {localStorage.getItem('auth_email')?
         <div className="flex relative dark:bg-main-dark-bg">
          {/*  <div className="fixed right-4 bottom-4" style={{ zIndex: '1000' }}>
             <TooltipComponent
@@ -56,17 +61,27 @@ const App = () => {
 
             </TooltipComponent>
           </div> */}
-          {activeMenu ? (
+         
+        {/* //  { */}
+          ({
+          activeMenu ? 
+          
+          // (
             <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white ">
               <Sidebar />
             </div>
-          ) : (
+          // ) 
+          : 
+          // (
             <div className="w-0 dark:bg-secondary-dark-bg">
               <Sidebar />
             </div>
-          )}
-          <div
-            className={
+})
+        {/* //  } */}
+          (
+          <div 
+            className=
+            {
               activeMenu
                 ? 'dark:bg-main-dark-bg  bg-main-bg min-h-screen md:ml-72 w-full'
                 : 'bg-main-bg dark:bg-main-dark-bg  w-full min-h-screen flex-2'
@@ -76,20 +91,26 @@ const App = () => {
               <Navbar />
             </div>
             <div>
-              {themeSettings && (<ThemeSettings />)}
+              {(themeSettings) && <ThemeSettings />}
 
               <Routes>
              
-                <Route path="/" element={(<Latest />)} />
-                <Route path="/upcoming" element={(<Latest />)} />
-                <Route path="/list" element={(<FullWidthTabs />)} />
-                <Route path="/detailpage" element={(<DetailPage />)} />
-
+                <Route path="/" element={<Latest />} />
+                {/* <Route path="/upcoming" element={<Latest />} /> */}
+                <Route path="/list" element={<FullWidthTabs />} />
+                <Route path="/detailpage" element={<DetailPage />} />
+                <Route path="/signin" element={<Signin/>}/>
+                <Route path='/signup' element={<SignUp/>}/>
+                <Route path='/userProfile' element={<UserProfile/>}/>
+                
               </Routes>
             </div>
             <Footer />
           </div>
+          ) 
+          
         </div>
+        : <Signin/>}
       </BrowserRouter>
     </div>
   );

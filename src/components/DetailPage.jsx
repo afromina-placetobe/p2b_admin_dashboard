@@ -19,17 +19,18 @@ import axios from "axios";
 import { Alert } from "@mui/material";
 import EditEvent from "./datatable/EditEvent";
 const DetailPage = () => {
-  const images = [
-    {
-      url: "https://cdnuploads.aa.com.tr/uploads/Contents/2022/01/23/thumbs_b_c_e087a3f5a302e41d70b3407cb6c8f2c0.jpg?v=160048",
-    },
-    {
-      url: "http://guidetoethiopia.com/wp-content/uploads/2016/05/Great-Ethiopian-Run.jpg",
-    },
-    {
-      url: "http://guidetoethiopia.com/wp-content/uploads/2016/05/Great-Ethiopian-Run.jpg",
-    },
-  ];
+  // const images = [
+  //   {
+  //     url: {"http://localhost:8000/uploads/ProfilePicture/" +
+  //       event.event_image},
+  //   },
+  //   {
+  //     url: "http://guidetoethiopia.com/wp-content/uploads/2016/05/Great-Ethiopian-Run.jpg",
+  //   },
+  //   {
+  //     url: "http://guidetoethiopia.com/wp-content/uploads/2016/05/Great-Ethiopian-Run.jpg",
+  //   },
+  // ];
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -61,6 +62,7 @@ const DetailPage = () => {
       });
     });
   };
+
 
   const publishEvent = () => {
     axios.get("/sanctum/csrf-cookie").then((response) => {
@@ -129,10 +131,10 @@ const DetailPage = () => {
       <div className="modal-body">
         <EditEvent data={id}/>
       </div>
-      <div className="modal-footer">
+      {/* <div className="modal-footer">
         <button type="button" style={{color:"Black"}} className="btn btn-primary" data-bs-dismiss="modal">Close</button>
         <button type="button" style={{color:"Black"}} className="btn btn-danger" onClick={EditEvent} data-bs-dismiss="modal">Edit</button>
-      </div>
+      </div> */}
     </div>
   </div>
 </div>
@@ -145,12 +147,16 @@ const DetailPage = () => {
               className="card_imgBox shadow p-1 mb-5 ml-5 mt-10 bg-white rounded"
               style={{ width: "100%", height: "350px" }}
             >
-              <SimpleImageSlider
-                width={width}
-                height={height}
-                images={images}
-                showBullets={true}
-                showNavs={true}
+              <img
+                width="1000rem"
+                // height="20px"
+                style={{height:'20rem'}}
+                src={
+                  "http://localhost:8000/assets/" +
+                  event.event_image
+                }
+                // showBullets={true}
+                // showNavs={true}
               />
             </div>
           </Col>
@@ -158,18 +164,7 @@ const DetailPage = () => {
           <Col xs md lg="6" className="flex items-center justify-center">
             <div className=" mb-5 ml-5 mt-10 flex-column items-center justify-center ">
               <h2 className="text-center text-lg font-semibold ">Event Name</h2>
-              {/* <ShowMoreLess
-        className="a"
-        text={text}
-        threshold={200}
-        expanded={expanded}
-        onExpand={setExpanded}
-        classes={{
-            root: styles.root,
-            text: styles.text,
-            clickable: styles.clickable
-        }}
-    /> */}
+              
               <p>{event.event_name}</p>
 
               {/* <p className='p-2'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took</p> */}

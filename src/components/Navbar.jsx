@@ -1,17 +1,20 @@
 import React, { useEffect } from 'react';
 import { AiOutlineMenu } from 'react-icons/ai';
-import { FiShoppingCart } from 'react-icons/fi';
-import { BsChatLeft } from 'react-icons/bs';
-import { RiNotification3Line } from 'react-icons/ri';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import { useStateContext } from '../contexts/ContextProvider';
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import "./navbar.scss";
-import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import FullscreenExitOutlinedIcon from "@mui/icons-material/FullscreenExitOutlined";
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
+import UserProfile from './UserProfile';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { Button } from '@mui/material';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 const NavButton = ({ title, customFunc, icon, color, dotColor }) => (
   <TooltipComponent content={title} position="BottomCenter">
     <button
@@ -41,7 +44,7 @@ const Navbar = () => {
 
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
+ const navigate = useNavigate();
   useEffect(() => {
     if (screenSize <= 900) {
       setActiveMenu(false);
@@ -52,6 +55,23 @@ const Navbar = () => {
 
   const handleActiveMenu = () => setActiveMenu(!activeMenu);
 
+  const logoutSubmit = (e) => {
+    console.log('logout')
+		axios.post("/api/logout").then((res) => {
+			if (res.data.status === 200) {
+    
+
+				localStorage.removeItem("auth_token");
+				localStorage.removeItem("auth_email");
+				localStorage.removeItem("auth_id");
+        console.log('logout successful')
+        window.location.href='/';
+
+        console.log('navigate ddnt work')
+			} else {
+			}
+		});
+	};
   return (
     <div className="flex justify-between p-2 md:ml-6 md:mr-6 relative bg background">
 
@@ -72,21 +92,27 @@ const Navbar = () => {
         <TooltipComponent content="Profile" position="BottomCenter">
           <div
             className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
-            onClick={() => handleClick('userProfile')}
+            // onClick={() => handleClick('userProfile')}
           >
+            {/* <Link to='/userProfile'> */}
             <img
               className="rounded-full w-8 h-8"
               src="https://afromina-digitals.com/wp-content/uploads/2022/06/P2B_IconFT.webp"
               alt="user-profile"
             />
-            <p>
-
-              <span className="text-yellow-900 font-bold ml-1 text-14">
-                P2B
-              </span>
-            </p>
-            <MdKeyboardArrowDown className="text-gray-400 text-14" />
+            <FormControl sx={{ m: 1, minWidth: 120 }}>
+            <InputLabel id="demo-simple-select-helper-label">P2B</InputLabel>
+        <Select
+          displayEmpty
+          inputProps={{ 'aria-label': 'Without label' }}
+        >
+          
+          <MenuItem >{" "}</MenuItem>
+          <MenuItem ><Button onClick={logoutSubmit}>Logout</Button></MenuItem>
+        </Select>
+      </FormControl>
           </div>
+          
         </TooltipComponent>
 
         {isClicked.cart && (<Cart />)}
